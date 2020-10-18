@@ -1,9 +1,9 @@
  .el-row {
     margin-bottom: 100px;
-    &:last-child {
-      margin-bottom: 0;
-    }
+    /* &:last-child {
+      margin-bottom: 1;
+    } */
   }
   .el-col {
-    border-radius: 4px;
+    border-radius: 5px;
   }
