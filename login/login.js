@@ -16,78 +16,61 @@ var login = new Vue({
 	methods: {
 		submitForm(formName) {
 			this.$refs[formName].validate((valid) => {
-				/*
-			 	if (valid) {
-					alert('submit!');
-					console.log(this.numberValidateForm.user);
-					console.log(this.numberValidateForm.password);
-				 	axios.post("47.115.152.5:8080/admin/login.do",{user:this.numberValidateForm.user,password:this.numberValidateForm.password}).then(function(res) {
-						console.log(res); 
-					})
-					//点击成功
-				} else {
-					console.log('error submit!!');
-					return false;
-				} */
+				if(this.radio=="登录"){
 				console.log(this.numberValidateForm.user);
 				console.log(this.numberValidateForm.password);
-				// axios.post("http://47.115.152.5:8080/admin/login.do",{user:this.numberValidateForm.user,password:this.numberValidateForm.password}).then(function(res) {
-				// 	console.log(res); 
-				//})
-				// axios.post("http://4k3s59.natappfree.cc/admin/login.do",
-				// {
-				// 	username:this.numberValidateForm.user,
-				// 	password:this.numberValidateForm.password
-				// })
-				// .then(function(response){
-				// 			console.log(response);
-				// 		})
-				// axios.get("http://4k3s59.natappfree.cc/manage/product/list.do").then(function(res){
-				// 	console.log(res);
-				// })
-
-				// axios.post('http://47.115.152.5:8080/admin/login.do', {
-				// 	//username:this.numberValidateForm.user,
-				// 	//password:this.numberValidateForm.password
-				// 	"username":this.numberValidateForm.user,
-				// 	"password":this.numberValidateForm.password
-				//   })
-				//   .then(function (response) {
-				// 	console.log(response);
-				// 	console.log(this.numberValidateForm.user);
-				// 	console.log(this.numberValidateForm.password);
-				//   })
-				//   .catch(function (error) {
-				// 	console.log(error);
-				//   });
-
-				// axios.post('http://47.115.152.5:8080/admin/login.do', {
-				// 	params: {
-				// 		username:'admin',
-				// 	 	password:'admin'
-				// 	}
-				//   })
-				//   .then(function (response) {
-				// 	console.log(response);
-				//   })
-				//   .catch(function (error) {
-				// 	console.log(error);
-				//   });
-				// 发送 POST 请求
 					axios({
 						method: 'post',
 						url: 'http://47.115.152.5:8080/admin/login.do',
 						params: {
-							username:"admin",
-							password:"admin"
+							username:this.numberValidateForm.user,
+							password:this.numberValidateForm.password
 						},
 						headers: {
 							'Content-Type': 'application/x-www-form-urlencoded'
 						},
 					})
 					.then(function(res){
-						console.log(res);
+						//console.log(res.data.msg);
+						if(res.data.msg=="登录成功！")
+						{
+							alert("登陆成功");
+						}
+						else{
+							alert("用户名或密码错误");
+						}
 					});
+					}
+					else{
+						axios({
+							method: 'post',
+							url: 'http://47.115.152.5:8080/admin/register.do',
+							params: {
+								username:this.numberValidateForm.user,
+								password:this.numberValidateForm.password,
+								phone:this.numberValidateForm.phone,
+								email:this.numberValidateForm.email
+							},
+							headers: {
+								'Content-Type': 'application/x-www-form-urlencoded'
+							},
+						})
+						.then(function(res){
+							if(res.data.msg=="注册成功")
+							{
+								alert("注册成功，请返回登录");
+							}
+							else if(res.data.msg=="邮箱已被注册"){
+								alert("邮箱已被注册！");
+							}
+							else if(res.data.msg=="该手机已被注册"){
+								alert("该手机已被注册")
+							}
+							else if(res.data.msg=="用户名已存在"){
+								alert("用户名已存在")
+							}
+						});
+					}
 			});
 		},
 		resetForm(formName) {
