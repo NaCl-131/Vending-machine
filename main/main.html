@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>主页面</title>
+  <script src="../vue/vue.js" type="text/javascript" charset="utf-8"></script>
+
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="/element/ELEMENT.css">
+  <!-- 引入组件库 -->
+  <script src="/element/element.js"></script>
+
+  <script src="/axiox/axiox.js"></script>
+</head>
+
+<body>
+  <div id="main">
+    <button @click="login()">点击</button>
+    <button @click="doit">获取</button>
+    <el-tabs tab-position="left" >
+      <el-tab-pane label="设备管理">
+        <template>
+          <el-table :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+            style="width: 100%">
+            <!-- 搜索功能 -->
+            <el-table-column label="Id" prop="id">
+            </el-table-column>
+
+            <el-table-column label="Name" prop="name">
+            </el-table-column>
+
+            <el-table-column label="Location" prop="location">
+            </el-table-column>
+
+            <el-table-column label="Address" prop="address">
+            </el-table-column>
+
+            <el-table-column align="right">
+              <template slot="header" slot-scope="scope">
+                <el-input v-model="search" size="mini" placeholder="输入关键字搜索" />
+              </template>
+              <template slot-scope="scope">
+                <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+                <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </template>
+      </el-tab-pane>
+      <el-tab-pane label="产品管理">
+        <template>
+          <el-table :data="FruitData.filter(data => !Fruit_Search || data.FruitName.toLowerCase().includes(Fruit_Search.toLowerCase()))"
+            style="width: 100%">
+            <el-table-column label="Id" prop="FruitId">
+            </el-table-column>
+
+            <el-table-column label="Name" prop="FruitName">
+            </el-table-column>
+
+            <el-table-column label="Subtitle" prop="subtitle">
+            </el-table-column>
+
+            <el-table-column label="Price" prop="price">
+            </el-table-column>
+
+            <el-table-column align="right">
+              <template slot="header" slot-scope="scope">
+                <el-input v-model="Fruit_Search" size="mini" placeholder="输入关键字搜索" />
+              </template>
+              <template slot-scope="scope">
+                <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+                <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </template>
+      </el-tab-pane>
+    </el-tabs>
+  </div>
+  <script src="./main.js"></script>
+</body>
+
+</html>
