@@ -27,7 +27,8 @@ var main=new Vue({
         }],
 
         search: '',
-        Fruit_Search:''
+        Fruit_Search:'',
+        cookie:''//保存登录信息
       }
     },
     methods: {
@@ -39,6 +40,7 @@ var main=new Vue({
           },
           //test
         login:function(){
+          var that=this;
           axios({
 						method: 'post',
 						url: 'http://47.115.152.5:8080/admin/login.do',
@@ -47,29 +49,32 @@ var main=new Vue({
 							password:"admin"
 						},
 						headers: {
-							'Content-Type': 'application/x-www-form-urlencoded'
+							'Content-Type': 'multipart/form-data'
 						},
 					})
 					.then(function(res){
 						//console.log(res.data.msg);
 						if(res.data.msg=="登录成功！")
 						{
-							console.log(res);
+              console.log(res);
+              var x=document.cookie;
+              console.log(x);
+              // var currentPassword = ${sessionScope};
+             // console.log(res.headers.cookie);
+              //console.log(session.getAttribute("currentUser"));
+
 						}
 						else{
 							alert("用户名或密码错误");
 						}
-          });
-
-          
-          
+          });          
         },
         doit:function(){
           axios({
 						method: 'get',
 						url:"http://47.115.152.5:8080/manage/devicies/list.do",
 						headers:{
-                'Cookie': 'JSESSIONID=3EF1CBCD0DC057CE541EF04A4D27501D'
+							'Content-Type': 'multipart/form-data'
             }
 					})
 					.then(function(res){
