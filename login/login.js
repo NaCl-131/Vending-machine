@@ -17,8 +17,8 @@ var login = new Vue({
 		submitForm(formName) {
 			this.$refs[formName].validate((valid) => {
 				if(this.radio=="登录"){
-				console.log(this.numberValidateForm.user);
-				console.log(this.numberValidateForm.password);
+				// console.log(this.numberValidateForm.user);
+				// console.log(this.numberValidateForm.password);
 					axios({
 						method: 'post',
 						url: 'http://47.115.152.5:8080/admin/login.do',
@@ -26,15 +26,14 @@ var login = new Vue({
 							username:this.numberValidateForm.user,
 							password:this.numberValidateForm.password
 						},
-						headers: {
-							'Content-Type': 'application/x-www-form-urlencoded'
-						},
+						
 					})
 					.then(function(res){
 						//console.log(res.data.msg);
 						if(res.data.msg=="登录成功！")
 						{
 							alert("登陆成功");
+							window.location.replace("../main/main.html");
 						}
 						else{
 							alert("用户名或密码错误");
