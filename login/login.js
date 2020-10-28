@@ -53,6 +53,7 @@ var login = new Vue({
 							headers: {
 								'Content-Type': 'application/x-www-form-urlencoded'
 							},
+							withCredentials: true,							
 						})
 						.then(function(res){
 							if(res.data.msg=="注册成功")
