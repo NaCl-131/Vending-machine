@@ -16,9 +16,9 @@
 
 <body>
   <div id="main">
-	  <!-- test -->
- <button type="button"@click="login()">login</button>
- <button type="button" @click="doit()">doit</button>
+    <!-- test -->
+    <button @click="login()"></button>
+ <button type="button" @click="doit();sp()" >获取</button>
  <!-- test -->
     <el-tabs tab-position="left" >
       <el-tab-pane label="设备管理">
@@ -40,7 +40,7 @@
 
             <el-table-column align="right">
               <template slot="header" slot-scope="scope">
-                <el-input v-model="search" size="mini" placeholder="输入关键字搜索" />
+                <el-input v-model="search" size="mini" placeholder="输入名称搜索" />
               </template>
               <template slot-scope="scope">
                 <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
@@ -52,12 +52,12 @@
       </el-tab-pane>
       <el-tab-pane label="产品管理">
         <template>
-          <el-table :data="FruitData.filter(data => !Fruit_Search || data.FruitName.toLowerCase().includes(Fruit_Search.toLowerCase()))"
+          <el-table :data="FruitData.filter(data => !Fruit_Search || data.name.toLowerCase().includes(Fruit_Search.toLowerCase()))"
             style="width: 100%">
-            <el-table-column label="Id" prop="FruitId">
+            <el-table-column label="Id" prop="id">
             </el-table-column>
 
-            <el-table-column label="Name" prop="FruitName">
+            <el-table-column label="Name" prop="name">
             </el-table-column>
 
             <el-table-column label="Subtitle" prop="subtitle">
@@ -68,7 +68,7 @@
 
             <el-table-column align="right">
               <template slot="header" slot-scope="scope">
-                <el-input v-model="Fruit_Search" size="mini" placeholder="输入关键字搜索" />
+                <el-input v-model="Fruit_Search" size="mini" placeholder="输入名称搜索" />
               </template>
               <template slot-scope="scope">
                 <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>

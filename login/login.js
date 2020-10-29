@@ -10,6 +10,7 @@ var login = new Vue({
 		},
 		l_or_r: "",
 		radio: "登录",	//0为登录，1为注册
+		cookie:"wdadsadsdasda"
 	},
 
 	// },
@@ -26,14 +27,14 @@ var login = new Vue({
 							username:this.numberValidateForm.user,
 							password:this.numberValidateForm.password
 						},
-						
+					withCredentials: true,	
 					})
 					.then(function(res){
 						//console.log(res.data.msg);
 						if(res.data.msg=="登录成功！")
 						{
 							alert("登陆成功");
-							window.location.replace("../main/main.html");
+							window.location.assign("../main/main.html");
 						}
 						else{
 							alert("用户名或密码错误");
@@ -79,3 +80,4 @@ var login = new Vue({
 	},
 	pust: function() {}
 })
+
